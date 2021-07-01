@@ -1,4 +1,5 @@
 import json
+import random
 from time import sleep
 
 from typing import Optional, Tuple, List
@@ -33,6 +34,21 @@ def _fetch_review_items(
     filter_score_with: Optional[int],
     pagination_token: Optional[str],
 ):
+
+    user_agents = [
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0",
+        "Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+    ]
+
     dom = post(
         url,
         Formats.Reviews.build_body(
@@ -42,7 +58,8 @@ def _fetch_review_items(
             "null" if filter_score_with is None else filter_score_with,
             pagination_token,
         ),
-        {"content-type": "application/x-www-form-urlencoded"},
+        {"content-type": "application/x-www-form-urlencoded",
+        "User-Agent": random.choice(user_agents)},
     )
 
     match = json.loads(Regex.REVIEWS.findall(dom)[0])
