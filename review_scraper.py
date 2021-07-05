@@ -5,6 +5,8 @@ import math
 import time
 import random
 import json
+import os.path
+from os import path
 
 BATCH_SIZE = 200 # MAX IS 200
 PATH = '' #add save path here @Ayushi/Pooja
@@ -27,18 +29,20 @@ class App:
         '''
         add code to save app data here @Ayushi/Pooja
         '''
+        
+        if path.exists('app_meta_details.json'):
+            f = open('app_meta_details.json')
+            data = json.load(f)
+            # print(len(data))
+            # print(type(data))
+            data.append(self.app_data)
 
-        f = open('app_meta_details.json',)
-   
-        data = json.load(f)
-        print(len(data))
-        print(type(data))
+        else:
+            data = []
+            data.append(self.app_data)
 
-        data.append(self.app_data)
-
-        with open('app_meta_details.json', 'w') as json_file:
+        with open('app_meta_details.json', '+w') as json_file:
             json.dump(data, json_file, indent=2)
-            json_file.write('\n')
         
         return
 
