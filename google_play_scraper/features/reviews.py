@@ -88,6 +88,7 @@ def reviews(
         token = None
 
     url = Formats.Reviews.build(lang=lang, country=country)
+    print("hi")
 
     if count > MAX_COUNT_EACH_FETCH:
         _count = MAX_COUNT_EACH_FETCH
