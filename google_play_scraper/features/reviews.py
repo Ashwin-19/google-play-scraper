@@ -88,7 +88,7 @@ def reviews(
         token = None
 
     url = Formats.Reviews.build(lang=lang, country=country)
-    print("hi")
+    # print(lang)
 
     if count > MAX_COUNT_EACH_FETCH:
         _count = MAX_COUNT_EACH_FETCH
@@ -150,10 +150,14 @@ def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
 
         result += _result
 
+        print(len(result))
+
         if continuation_token.token is None:
+            print("cont token is none")
             break
 
         if sleep_milliseconds:
+            print("sleeping...")
             sleep(sleep_milliseconds / 1000)
 
     return result
