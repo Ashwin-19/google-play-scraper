@@ -26,6 +26,7 @@ def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
     ]
 
+
     dom = post(
         url,
         Formats.Detail.build_body(
@@ -36,6 +37,8 @@ def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
         {"content-type": "application/x-www-form-urlencoded",
         "User-Agent": random.choice(user_agents)},
     )
+
+    if dom == 404: return dom
 
     matches = Regex.SCRIPT.findall(dom)
 

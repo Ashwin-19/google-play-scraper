@@ -11,7 +11,8 @@ def _urlopen(obj):
         resp = urlopen(obj)
     except HTTPError as e:
         if e.code == 404:
-            raise NotFoundError("App not found(404).")
+            return e.code
+            # raise NotFoundError("App not found(404).")
         else:
             raise ExtraHTTPError(
                 "App not found. Status code {} returned.".format(e.code)
