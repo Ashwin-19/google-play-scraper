@@ -5,7 +5,7 @@ import random
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.request import Formats
-from google_play_scraper.utils.request import get
+from google_play_scraper.utils.request import get, post
 
 
 def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
