@@ -10,8 +10,6 @@ from google_play_scraper.constants.element import ElementSpecs
 
 def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, list]:
     
-    url = Formats.Detail.build(app_id=app_id, lang=lang, country=country)
-    
     user_agents = [
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
                     "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2919.83 Safari/537.36",
@@ -59,11 +57,11 @@ def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str,
 
 
     dom = post(
-        url,
         Formats.Permissions.build(lang=lang, country=country),
         Formats.Permissions.build_body(app_id),
         {"content-type": "application/x-www-form-urlencoded",
-        "User-Agent": random.choice(user_agents)},
+        "User-Agent": random.choice(user_agents)
+        },
     )
 
     if dom == 404: return dom
