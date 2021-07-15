@@ -13,7 +13,10 @@ def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str,
         Formats.Permissions.build_body(app_id),
         {"content-type": "application/x-www-form-urlencoded"},
     )
-
+    
+    if dom == 404:
+        return 404
+    
     matches = json.loads(Regex.PERMISSIONS.findall(dom)[0])
     container = json.loads(matches[0][2])
 
