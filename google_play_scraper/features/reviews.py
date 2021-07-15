@@ -35,7 +35,7 @@ def _fetch_review_items(
     pagination_token: Optional[str],
 ):
 
-     user_agents = [
+    user_agents = [
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
                     "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2919.83 Safari/537.36",
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2866.71 Safari/537.36",
@@ -80,16 +80,15 @@ def _fetch_review_items(
                     "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1467.0 Safari/537.36"
             ]
 
-
     dom = post(
-        url,
-        Formats.Reviews.build_body(
-            app_id,
-            sort,
-            count,
-            "null" if filter_score_with is None else filter_score_with,
-            pagination_token,
-        ),
+        	url,
+        	Formats.Reviews.build_body(
+            	app_id,
+            	sort,
+            	count,
+            	"null" if filter_score_with is None else filter_score_with,
+            	pagination_token,
+        	)	,
         {"content-type": "application/x-www-form-urlencoded",
         "User-Agent": random.choice(user_agents)},
     )
